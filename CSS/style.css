@@ -64,10 +64,11 @@ footer{
 
 .meals{
     height: 10vh;
-    width: 100%;
+    width: 99%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    overflow: scroll;
 }
 
 .meal{
@@ -83,4 +84,11 @@ footer{
 
 main{
     height: 80%;
+}
+
+.search-text{
+    width: 97%;
+    height: 100%;
+    font-size: 5vw;
+    font-family: 'Inter', sans-serif;
 }
