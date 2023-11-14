@@ -1,0 +1,26 @@
+.card-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card{
+    width: 100px;
+    height: 100px;
+    border: 1px solid grey;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
+.display-none{
+    display: none;
+}
