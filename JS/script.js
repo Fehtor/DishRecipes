@@ -1,5 +1,7 @@
 let cards = document.querySelectorAll(".card")
 let input = document.querySelector(".search-text")
+let meals = document.querySelectorAll(".meal")
+let curMeal = "All"
 console.log(input)
 
 function jaro_distance(s1, s2)
@@ -112,6 +114,21 @@ function jaro_Winkler(s1, s2)
         return jaro_dist.toFixed(6);
     }
 
+function changeMeal(event){
+    let eventId = event.currentTarget.getAttribute("id")
+    curMeal = eventId
+    for(let i = 0; i < meals.length; i++){
+        let itemId = meals[i].getAttribute("id")
+        if(eventId == itemId){
+            meals[i].classList.add("meal-clicked")
+        }
+        else{
+            meals[i].classList.remove("meal-clicked")
+        }   
+    }
+    defaultState()
+}
+
 function changeState(){
     let name = input.value
     if(name == ""){
@@ -120,19 +137,34 @@ function changeState(){
     }
     for(let i = 0; i < cards.length; i++){
         let cardName = cards[i].getAttribute("name")
-        if(jaro_Winkler(name, cardName) >= 0.75){
-            cards[i].classList.remove("display-none")
-        }
-        else{
-            cards[i].classList.add("display-none")
+        let cardMealType = cards[i].getAttribute("mealType")
+        if(cardMealType == curMeal || curMeal == "All"){
+            if(jaro_Winkler(name, cardName) >= 0.75){
+                cards[i].classList.remove("display-none")
+            }
+            else{
+                cards[i].classList.add("display-none")
+            }
         }
     }
 }
 
 function defaultState(){
     for(let i = 0; i < cards.length; i++){
-        cards[i].classList.remove("display-none")
+        let cardMealType = cards[i].getAttribute("mealType")
+        if(cardMealType != curMeal){
+            cards[i].classList.add("display-none")
+        }
+        else{
+            cards[i].classList.remove("display-none")
+        }
+        if(curMeal == "All"){
+            cards[i].classList.remove("display-none")
+        }
     }
 }
 
 input.addEventListener("input", changeState)
+for(let i = 0; i < meals.length; i++){
+    meals[i].addEventListener("click", changeMeal)
+}
